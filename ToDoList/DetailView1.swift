@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct DetailView1: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var passedValue: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "swift")
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(.orange)
+            
+            Text("You are a swift legend!\n \(passedValue)")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+            
+            Button("Get Back") {
+                dismiss()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+//        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    DetailView1()
+    DetailView1(passedValue: "Hello World!")
 }
