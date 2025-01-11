@@ -9,16 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct DetailView: View {
-    
     @State var toDo: ToDo
     
-    @State private var item = ""
-    @State private var reminderIsOn = false
-    @State private var dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
-    //    @State private var dueDate = Date.now + 60*60*24
-    @State private var notes = ""
-    @State private var isCompleted = false
-    
+    @State private var item: String = ""
+    @State private var reminderIsOn: Bool = false
+//    @State private var dueDate = Date.now + 60*60*24
+    @State private var dueDate: Date = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
+    @State private var notes: String = ""
+    @State private var isCompleted: Bool = false
+            
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) private var dismiss
     
@@ -39,6 +38,9 @@ struct DetailView: View {
                 .listRowSeparator(.hidden)
                 .disabled(!reminderIsOn)
             
+            Text("Notes:")
+                .padding(.top)
+            
             TextField("Notes", text: $notes, axis: .vertical)
                 .textFieldStyle(.roundedBorder)
                 .listRowSeparator(.hidden)
@@ -55,7 +57,6 @@ struct DetailView: View {
             notes = toDo.notes
             isCompleted = toDo.isCompleted
         }
-        
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
